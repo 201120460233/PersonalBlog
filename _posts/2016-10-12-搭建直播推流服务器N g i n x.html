@@ -1,0 +1,62 @@
+---
+layout: default
+title: 基于Nginx在Mac上搭建推流服务器
+---
+<h2>{{ page.title }}</h2>
+<p>最近在做直播相关的项目，一开始很懵逼，傻傻等后台同事搭建服务器让我访问他的视频url。一来二去，开发调试过程中，总是受到一定的限制和约束。于是便google，自己动手开始搭建推流服务器z。</p>
+<p>{{ page.date | date_to_string }}</p>
+<ul>
+　　<li>
+		<h4>
+			关于Nginx的简介
+		</h4>
+		<p>nginx是一个高性能的HTTP和反向代理服务器，并且开源，用它做hls或者rtmp流媒体服务器是非常不错的选择。</p>
+	</li>
+	<li>
+		<h4>
+			安装Nginx的步骤
+		</h4>
+		<p>安装Nginx大致有两种方式：通过homebrew和独立手动安装，由于手动比较繁琐，优选homebrew。</p>
+		<p>1. 安装Homebrew</p>
+		<p>Homebrew简称brew，是Mac OSX上的软件包管理工具，能在Mac中方便的安装软件或者卸载软件，可以说Homebrew就是mac下的apt-get、yum神器</p>
+		<p>命令： 
+			/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+		</p>
+		<p>命令： 
+			/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
+		</p>
+		<p>2. 安装Nginx</p>
+		<p>增加对 nginx 的扩展;也就是从github上下载，home-brew对ngixnx的扩展</p>
+		<p>命令： 
+			brew tap homebrew/nginx
+		</p>
+		<p>3. 安装Nginx服务器和rtmp模块</p>
+		<p>命令： 
+			brew install nginx-full --with-rtmp-module
+		</p>
+		<p>这个安装，耗时相对来说比较长。通过操作以上步骤nginx和rtmp模块就安装好了，下面开始来配置nginx的rtmp模块。</p>
+		<p>首先来看看我们的nginx安装在哪里</p>
+		<p>命令：
+			brew info nginx-full
+		</p>
+		<p>执行上面的命令后我们可以看到信息</p>
+		<img src="{{ site.imgurl }}nginx-full.png" />
+		<ul>
+			<li>
+				<p>nginx安装所在位置:/usr/local/Cellar/nginx-full/1.10.1/bin/nginx</p>
+			</li>
+			<li>
+				<p>nginx配置文件所在位置:/usr/local/etc/nginx/nginx.conf</p>
+			</li>
+			<li>
+				<p>nginx服务器根目录所在位置:/usr/local/var/www</p>
+			</li>
+		</ul>
+		<p>测试下是否能成功启动nginx服务，执行命令：
+			nginx
+		</p>
+		<p>在浏览器地址栏输入：http://localhost:8080</p>
+		<img src="{{ site.imgurl }}nginx-start-success.png" />
+		<p>出现Welcome to nginx，代表nginx安装成功了。</p>
+	</li>
+</ul>
